@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إلى أوزعتي الجميلة</title>
+    <style>
+        :root { --pink: #ffb1cc; --dark-pink: #ff4d6d; }
+        body { background: #fff0f3; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; overflow-x: hidden; }
+        
+        /* شاشة الباسورد */
+        #login-screen { position: fixed; inset: 0; background: #ffb1cc; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; }
+        #login-screen h2 { color: white; margin-bottom: 20px; text-shadow: 2px 2px #ff4d6d; }
+        #pass-input { padding: 10px; border-radius: 10px; border: none; font-size: 1.2rem; text-align: center; outline: none; }
+        #login-btn { margin-top: 15px; padding: 10px 30px; background: #ff4d6d; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
+
+        /* المحتوى الرئيسي */
+        #main-content { display: none; width: 90%; max-width: 800px; text-align: center; padding: 20px; position: relative; }
+        
+        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
+        .gallery img { width: 100%; border-radius: 15px; border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        .typewriter-container { background: white; padding: 25px; border-radius: 20px; border: 3px dashed #ff4d6d; min-height: 150px; font-size: 1.3rem; line-height: 1.8; color: #5a189a; position: relative; z-index: 5; }
+
+        /* استيكرات هيلو كيتي */
+        .kitty { position: fixed; width: 60px; pointer-events: none; z-index: 1; animation: float 6s infinite ease-in-out; }
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-20px) rotate(10deg); } }
+
+        .cursor-txt { border-left: 3px solid #ff4d6d; animation: blink 0.7s infinite; }
+        @keyframes blink { from, to { border-color: transparent } 50% { border-color: #ff4d6d } }
+    </style>
+</head>
+<body>
+
+<div id="login-screen">
+    <h2>الباسورد تاريخ ميلادك يا أوزعة</h2>
+    <input type="password" id="pass-input" placeholder="اكتبي الباسورد هنا...">
+    <button id="login-btn">دخول ❤️</button>
+</div>
+
+<div id="main-content">
+    <div class="gallery">
+        <img src="https://i.ibb.co/LhY9TzR/your-photo.jpg" alt="صورة 1">
+        <img src="https://i.ibb.co/LhY9TzR/your-photo.jpg" alt="صورة 2">
+        <img src="https://i.ibb.co/LhY9TzR/your-photo.jpg" alt="صورة 3">
+        <img src="https://i.ibb.co/LhY9TzR/your-photo.jpg" alt="صورة 4">
+    </div>
+
+    <div class="typewriter-container">
+        <span id="text"></span><span class="cursor-txt"></span>
+    </div>
+</div>
+
+<script>
+    const passInput = document.getElementById('pass-input');
+    const loginBtn = document.getElementById('login-btn');
+    const loginScreen = document.getElementById('login-screen');
+    const mainContent = document.getElementById('main-content');
+
+    const message = "أجمل وأطعم وأطيب أوزعة في الدُنيا كُلها والله، حرفيا مفكيش غلطة يا أوزعة، بس يا سلام لو نرجع زي زمان ننتظم في الصلاة ونداري رقبتنا ونلبس واسع يا سلااااااااااااااام، هتبقي ساعتها أجمل وأطعم وأطيب أوزعة برو ماكس، وعارف اني خنقتك بالكلام في المواضيع دي بس والله بعمل كده عشان فعلا بحبك وخايف عليكي ونفسي فعلا تخشي الفردوس الأعلى الي دايما بدعيهالك، عشان بجد هيصعب عليا لو القمر ده دخل النار عشان مش بيصلي او عشان الـ5 سنتي الي بيبينهم من رقبته، ياربييييي حتى في الويب سايت قاعد برغيي برضه، ده احنا لو اتجوزنا بجد لازم اجبلك كل يوم علبة بانادول اكسترا بسبب الصُداع الي هيجيلك مني، عشان عارف كويس اني عمري ما هشبع منك وكل يوم حُبي ليكي هيزيد مش يقل";
+
+    loginBtn.onclick = () => {
+        if (passInput.value === "1182004") {
+            loginScreen.style.display = "none";
+            mainContent.style.display = "block";
+            startTypewriter();
+            addKitties();
+        } else {
+            alert("الباسورد غلط يا أوزعة! ركزي");
+        }
+    };
+
+    function startTypewriter() {
+        let i = 0;
+        const speed = 70;
+        function type() {
+            if (i < message.length) {
+                document.getElementById("text").innerHTML += message.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else {
+                setTimeout(() => {
+                    document.getElementById("text").innerHTML = "";
+                    i = 0;
+                    type();
+                }, 3000); // إعادة الكتابة بعد 3 ثواني
+            }
+        }
+        type();
+    }
+
+    function addKitties() {
+        const kittyImg = "https://www.pngarts.com/files/7/Hello-Kitty-PNG-Free-Download.png";
+        for (let j = 0; j < 10; j++) {
+            let img = document.createElement('img');
+            img.src = kittyImg;
+            img.className = 'kitty';
+            img.style.left = Math.random() * 90 + 'vw';
+            img.style.top = Math.random() * 90 + 'vh';
+            img.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(img);
+        }
+    }
+</script>
+
+</body>
+</html>
